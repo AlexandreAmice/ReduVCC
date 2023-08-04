@@ -13,50 +13,49 @@ namespace py = pybind11;
 PYBIND11_MODULE(vcc, m) {
   py::class_<redu_vcc>(m, "redu_cc")
       .def(py::init<>())
-      .def(py::init<graph_access &>(), py::arg("G"))
-      .def(py::init<graph_access &, PartitionConfig &>(), py::arg("G"),
-           py::arg("partition_config"))
-      // Fairly unsafe public accessors. Making as read only for now
-      .def_readonly("self_to_parent", &redu_vcc::num_nodes)
-      .def_readonly("adj_list", &redu_vcc::adj_list)
-      .def_readonly("node_status", &redu_vcc::node_status)
-      .def_readonly("fold_node", &redu_vcc::fold_node)
-      .def_readonly("merge_node", &redu_vcc::merge_node)
-      .def_readonly("remaining_nodes", &redu_vcc::remaining_nodes)
-      .def_readonly("clique_cover", &redu_vcc::clique_cover)
-      .def_readonly("next_cliqueID", &redu_vcc::next_cliqueID)
-      .def_readonly("next_solvecliqueID", &redu_vcc::next_solvecliqueID)
-      .def_readonly("node_clique", &redu_vcc::node_clique)
-      .def_readonly("solve_node_clique", &redu_vcc::solve_node_clique)
-      .def_readonly("node_mis", &redu_vcc::node_mis)
-      .def_readonly("curr_mis", &redu_vcc::curr_mis)
-      .def_readonly("kernel_adj_list", &redu_vcc::kernel_adj_list)
-      .def_readonly("kernel_edges", &redu_vcc::kernel_edges)
-      .def_readonly("scratch1", &redu_vcc::scratch1)
-      .def_readonly("scratch2", &redu_vcc::scratch2)
-      // Binding methods
-      .def("removeVertex", &redu_vcc::removeVertex, py::arg("v"))
-      .def("addVertex", &redu_vcc::addVertex, py::arg("v"))
-      .def("removeVertexSet", &redu_vcc::removeVertexSet, py::arg("S"))
-      .def("addVertexSet", &redu_vcc::addVertexSet, py::arg("S"))
-      .def("adj_size", &redu_vcc::adj_size, py::arg("v"))
-      .def("curr_adj_list", &redu_vcc::curr_adj_list, py::arg("v"))
-      //      .def("printAdjList", &redu_vcc::printAdjList) dont bind this
-      //      overload as we don't have std::nullopt in c++ 14
+//      .def(py::init<graph_access &>(), py::arg("G"))
+////      .def(py::init<graph_access &, PartitionConfig &>(), py::arg("G"),
+////           py::arg("partition_config"))
+////       Fairly unsafe public accessors. Making as read only for now
+//      .def_readonly("self_to_parent", &redu_vcc::num_nodes)
+//      .def_readonly("adj_list", &redu_vcc::adj_list)
+//      .def_readonly("node_status", &redu_vcc::node_status)
+//      .def_readonly("fold_node", &redu_vcc::fold_node)
+//      .def_readonly("merge_node", &redu_vcc::merge_node)
+//      .def_readonly("remaining_nodes", &redu_vcc::remaining_nodes)
+//      .def_readonly("clique_cover", &redu_vcc::clique_cover)
+//      .def_readonly("next_cliqueID", &redu_vcc::next_cliqueID)
+//      .def_readonly("next_solvecliqueID", &redu_vcc::next_solvecliqueID)
+//      .def_readonly("node_clique", &redu_vcc::node_clique)
+//      .def_readonly("solve_node_clique", &redu_vcc::solve_node_clique)
+//      .def_readonly("node_mis", &redu_vcc::node_mis)
+//      .def_readonly("curr_mis", &redu_vcc::curr_mis)
+//      .def_readonly("kernel_adj_list", &redu_vcc::kernel_adj_list)
+//      .def_readonly("kernel_edges", &redu_vcc::kernel_edges)
+//      .def_readonly("scratch1", &redu_vcc::scratch1)
+//      .def_readonly("scratch2", &redu_vcc::scratch2)
+//      // Binding methods
+//      .def("removeVertex", &redu_vcc::removeVertex, py::arg("v"))
+//      .def("addVertex", &redu_vcc::addVertex, py::arg("v"))
+//      .def("removeVertexSet", &redu_vcc::removeVertexSet, py::arg("S"))
+//      .def("addVertexSet", &redu_vcc::addVertexSet, py::arg("S"))
+//      .def("adj_size", &redu_vcc::adj_size, py::arg("v"))
+//      .def("curr_adj_list", &redu_vcc::curr_adj_list, py::arg("v"))
+//      .def("printAdjList", py::overload_cast<>(&redu_vcc::printAdjList))
 //      .def("printAdjList", py::overload_cast<NodeID>(&redu_vcc::printAdjList), py::arg("v"))
-      .def("printNeighborhood", &redu_vcc::printNeighborhood, py::arg("v"))
-      .def("printVectorSet", &redu_vcc::printVectorSet, py::arg("S"))
-      .def("addCliquesToParent", &redu_vcc::addCliquesToParent, py::arg("parent"))
-      .def("addClique", &redu_vcc::addClique, py::arg("clique"))
-      .def("addCliqueToCover", &redu_vcc::addCliqueToCover, py::arg("clique"))
-      .def("pop_clique", &redu_vcc::pop_clique, py::arg("clique"))
-      .def("getCliqueID", &redu_vcc::getCliqueID, py::arg("v"))
-      .def("getClique", &redu_vcc::getClique, py::arg("v"))
-      .def("replaceClique", &redu_vcc::replaceClique, py::arg("cliqueID"), py::arg("new_clique"))
-      .def("build_cover", &redu_vcc::build_cover)
-      .def("validateCover", &redu_vcc::validateCover, py::arg("G"))
+////      .def("printNeighborhood", &redu_vcc::printNeighborhood, py::arg("v"))
+//      .def("printVectorSet", &redu_vcc::printVectorSet, py::arg("S"))
+//      .def("addCliquesToParent", &redu_vcc::addCliquesToParent, py::arg("parent"))
+//      .def("addClique", &redu_vcc::addClique, py::arg("clique"))
+//      .def("addCliqueToCover", &redu_vcc::addCliqueToCover, py::arg("clique"))
+//      .def("pop_clique", &redu_vcc::pop_clique, py::arg("clique"))
+//      .def("getCliqueID", &redu_vcc::getCliqueID, py::arg("v"))
+//      .def("getClique", &redu_vcc::getClique, py::arg("v"))
+//      .def("replaceClique", &redu_vcc::replaceClique, py::arg("cliqueID"), py::arg("new_clique"))
+//      .def("build_cover", &redu_vcc::build_cover)
+//      .def("validateCover", &redu_vcc::validateCover, py::arg("G"))
       ;
-
+//
   py::class_<graph_access>(m, "graph_access")
       .def(py::init<>())
       .def("start_construction", &graph_access::start_construction,
@@ -100,23 +99,23 @@ PYBIND11_MODULE(vcc, m) {
       .def("setEdgeRating", &graph_access::setEdgeRating, py::arg("edge"),
            py::arg("rating"))
       .def("copy", &graph_access::copy, py::arg("Gcopy"))
-
       ;
 
-  py::class_<graph_io>(m, "graph_io")
-      .def(py::init<>())
-      .def_static("readGraphWeighted", &graph_io::readGraphWeighted,
-                  py::arg("G"), py::arg("filename"))
-      .def_static("readGraphKernel", &graph_io::readGraphKernel, py::arg("G"),
-                  py::arg("reduVCC"))
-      .def_static("writeGraphWeighted", &graph_io::writeGraphWeighted,
-                  py::arg("G"), py::arg("filename"))
-      .def_static("writeGraph", &graph_io::writeGraph, py::arg("G"),
-                  py::arg("filename"))
-      .def_static("readPartition", &graph_io::readPartition, py::arg("G"),
-                  py::arg("filename"))
-      .def_static("writePartition", &graph_io::writePartition, py::arg("G"),
-                  py::arg("filename"));
+//  py::class_<graph_io>(m, "graph_io")
+//      .def(py::init<>())
+//      .def_static("readGraphWeighted", &graph_io::readGraphWeighted,
+//                  py::arg("G"), py::arg("filename"))
+//      .def_static("readGraphKernel", &graph_io::readGraphKernel, py::arg("G"),
+//                  py::arg("reduVCC"))
+//      .def_static("writeGraphWeighted", &graph_io::writeGraphWeighted,
+//                  py::arg("G"), py::arg("filename"))
+//      .def_static("writeGraph", &graph_io::writeGraph, py::arg("G"),
+//                  py::arg("filename"))
+//      .def_static("readPartition", &graph_io::readPartition, py::arg("G"),
+//                  py::arg("filename"))
+//      .def_static("writePartition", &graph_io::writePartition, py::arg("G"),
+//                  py::arg("filename"))
+                  ;
 
   // TODO(Alexandre.Amice). Seems like NodeID, EdgeID, PartitionId, NodeWeight, cliqueID
   // may all be important
