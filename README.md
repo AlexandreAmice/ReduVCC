@@ -11,6 +11,15 @@ Before you can start you need to install the following software packages:
 - Scons (http://www.scons.org/)
 - OpenMPI (http://www.open-mpi.de/) 
 
+
+
+This fork will also build the Python bindings (this has only been tested on Ubuntu 22.04.) To do this, be sure that you have installed the python headers (call `sudo apt install python3-dev`). After cloning the repository you will also need to call
+```
+git submodule init
+git submodule update
+```
+This will pull down [PyBind11](https://pybind11.readthedocs.io/en/stable/) in order to and install the Python bindings.
+
 After installing the packages, run `scons program=vcc variant=optimized` to build.
 
 ## Running
